@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
+    @tasks = Task.order("created_at DESC")
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -50,10 +51,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to tasks_path, notice: "delete"
   end
 
   private
@@ -64,6 +62,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.fetch(:task, {})
+      params.require(:task).permit(:task_name, :content)
     end
 end
