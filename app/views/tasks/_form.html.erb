@@ -15,5 +15,9 @@
   <%= task.text_field :task_name %>
   <%= task.label :content %>
   <%= task.text_field :content %>
+  <%= task.label "期限" %>
+  <%= task.date_field :limit %>
+  <%= task.label :status %>
+<%= task.select :status,Task.statuses.keys, {include_blank: "今の状態は？"}  %>
   <%= task.submit "Create my account"  %>
 <% end %>

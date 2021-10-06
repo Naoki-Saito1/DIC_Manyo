@@ -5,8 +5,15 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @tasks = Task.order("created_at DESC")
+    if params[:sort_expired]
+      @tasks = Task.order(limit: "DESC")
+      else
+        
+    end
+    # if params[:status] == 1
+    #   # @tasks = Task.(status: "未着手")
+    # end
   end
-
   # GET /tasks/1 or /tasks/1.json
   def show
   end
@@ -23,7 +30,6 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: "Task was successfully created." }
@@ -65,6 +71,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:task_name, :content)
+      params.require(:task).permit(:task_name, :content, :limit, :status)
     end
 end
