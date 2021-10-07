@@ -7,13 +7,15 @@ class TasksController < ApplicationController
     @tasks = Task.order("created_at DESC")
     if params[:sort_expired]
       @tasks = Task.order(limit: "DESC")
-      else
-        
     end
-    # if params[:status] == 1
-    #   # @tasks = Task.(status: "未着手")
-    # end
+  if params[:task_name].present? && params[:status].present?
+    @tasks = tasks.task_name(params[:task_name]).task_status(params[:status])
+  elsif params[:task_name].present?
+    @tasks = tasks.task_name(params[:task_name])
+  elsif params[:status].present?
+    @tasks = tasks.task_status(params[:status])
   end
+end  
   # GET /tasks/1 or /tasks/1.json
   def show
   end
@@ -71,6 +73,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:task_name, :content, :limit, :status)
+      params.require(:task).permit(:task_name, :content, :limit, :status, :priority, :created_at)
     end
 end
