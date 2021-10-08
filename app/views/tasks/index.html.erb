@@ -2,7 +2,7 @@
 
 <h1>タスク一覧</h1> 
 <%= form_with url: tasks_path,scope: :task, method: :get, local: true do |search| %>
-    <%= search.label :'keyword' %>
+    <%= search.label :'task_name' %>
     <%= search.text_field :task_name %>
     <%= search.label :'status'%>
     <%= search.select :status, Task.statuses.keys.to_a, { include_blank:'選択してください'}  %>
@@ -33,5 +33,6 @@
   </tbody>
 </table>
 <br>
-<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+<%= link_to "期限でソートする", tasks_path(sort_expired: "true") %>
+<%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
 <%= link_to '新規タスク', new_task_path %>

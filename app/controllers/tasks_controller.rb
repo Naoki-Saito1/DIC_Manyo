@@ -3,19 +3,31 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
+    
+    
     @tasks = Task.all
-    @tasks = Task.order("created_at DESC")
+    # binding.irb
+
     if params[:sort_expired]
       @tasks = Task.order(limit: "DESC")
     end
-  if params[:task_name].present? && params[:status].present?
-    @tasks = tasks.task_name(params[:task_name]).task_status(params[:status])
-  elsif params[:task_name].present?
-    @tasks = tasks.task_name(params[:task_name])
-  elsif params[:status].present?
-    @tasks = tasks.task_status(params[:status])
-  end
-end  
+    if params[:sort_priority]
+      @tasks = Task.order(priority: "ASC")
+    end
+
+  if params[:task].present?
+  
+    if params[:task][:task_name].present? && params[:task][:status].present?
+    @tasks = Task.task_name(params[:task][:task_name]).status(params[:task][:status])
+      elsif params[:task][:task_name].present?
+    @tasks = Task.task_name(params[:task][:task_name])
+      elsif params[:task][:status].present?
+    @tasks = Task.status(params[:task][:status])
+      else
+        @tasks = Task.order("created_at DESC")
+    end
+  end 
+end
   # GET /tasks/1 or /tasks/1.json
   def show
   end
