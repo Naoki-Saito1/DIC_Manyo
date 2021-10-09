@@ -10,8 +10,6 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'puma', '~> 4.1'
 
-gem 'sass-rails', '>= 6'
-
 gem 'webpacker', '~> 4.0'
 
 gem 'turbolinks', '~> 5'
@@ -46,3 +44,5 @@ end
 gem 'rails-i18n'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'sass-rails', '>= 3.2'

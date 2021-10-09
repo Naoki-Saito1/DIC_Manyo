@@ -11,7 +11,8 @@
       </ul>
     </div>
   <% end %>
-
+  <form>
+<div class="form-group"></div>
   <%= task.label :task_name %>
   <%= task.text_field :task_name %>
   <%= task.label :content %>
@@ -22,5 +23,7 @@
   <%= task.select :status,Task.statuses.keys, {include_blank: "今の状態は？"}  %>
   <%= task.label :priority %>
   <%= task.select :priority, Task.priorities.keys %>
-  <%= task.submit "Create my account"  %>
+  <%= task.submit "Create my account", class: "btn btn-outline-success btn-sm" %>
 <% end %>
+</div>
+</form>
