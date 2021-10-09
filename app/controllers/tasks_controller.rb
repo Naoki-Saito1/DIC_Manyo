@@ -14,19 +14,19 @@ class TasksController < ApplicationController
 
   if params[:task].present?
     if params[:task][:task_name].present? && params[:task][:status].present?
-    @tasks = Task.task_name(params[:task][:task_name]).status(params[:task][:status])
+    @tasks = Task.task_name(params[:task][:task_name]).status(params[:task][:status]).page(params[:page]).per(5)
       elsif params[:task][:task_name].present?
-    @tasks = Task.task_name(params[:task][:task_name])
+    @tasks = Task.task_name(params[:task][:task_name]).page(params[:page]).per(5)
       elsif params[:task][:status].present?
-    @tasks = Task.status(params[:task][:status])
+    @tasks = Task.status(params[:task][:status]).page(params[:page]).per(5)
     
     end
   end 
   if params[:sort_expired]
-    @tasks = Task.order(limit: "DESC")
+    @tasks = Task.order(limit: "DESC").page(params[:page]).per(5)
   end
   if params[:sort_priority]
-    @tasks = Task.order(priority: "ASC")
+    @tasks = Task.order(priority: "ASC").page(params[:page]).per(5)
   end
 end
   # GET /tasks/1 or /tasks/1.json
