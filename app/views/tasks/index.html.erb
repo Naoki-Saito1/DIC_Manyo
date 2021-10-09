@@ -21,9 +21,9 @@
         <td class="task_list"><%= task.task_name %></td>
         <td><%= task.content %></td>
         <td><%= task.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= task.limit %></td>
-        <td><%= task.status%></td>
-        <td><%= task.priority %></td>
+        <td class="task_list"><%= task.limit %></td>
+        <td class="task_list"><%= task.status%></td>
+        <td class="task_list"><%= task.priority %></td>
         <td><%= link_to '詳細', task %></td>
         <td><%= link_to '編集', edit_task_path(task) %></td>
         <td><%= link_to '削除', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -33,6 +33,6 @@
   </tbody>
 </table>
 <br>
-<%= link_to "期限でソートする", tasks_path(sort_expired: "true") %>
+<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
 <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
 <%= link_to '新規タスク', new_task_path %>

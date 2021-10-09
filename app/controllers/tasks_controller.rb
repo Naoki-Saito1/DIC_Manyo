@@ -8,25 +8,26 @@ class TasksController < ApplicationController
     @tasks = Task.all
     # binding.irb
 
-    if params[:sort_expired]
-      @tasks = Task.order(limit: "DESC")
-    end
-    if params[:sort_priority]
-      @tasks = Task.order(priority: "ASC")
-    end
+      @tasks = Task.order("created_at DESC")
+  
+
 
   if params[:task].present?
-  
     if params[:task][:task_name].present? && params[:task][:status].present?
     @tasks = Task.task_name(params[:task][:task_name]).status(params[:task][:status])
       elsif params[:task][:task_name].present?
     @tasks = Task.task_name(params[:task][:task_name])
       elsif params[:task][:status].present?
     @tasks = Task.status(params[:task][:status])
-      else
-        @tasks = Task.order("created_at DESC")
+    
     end
   end 
+  if params[:sort_expired]
+    @tasks = Task.order(limit: "DESC")
+  end
+  if params[:sort_priority]
+    @tasks = Task.order(priority: "ASC")
+  end
 end
   # GET /tasks/1 or /tasks/1.json
   def show
