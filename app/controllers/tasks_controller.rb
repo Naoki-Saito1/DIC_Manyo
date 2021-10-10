@@ -5,10 +5,10 @@ class TasksController < ApplicationController
   def index
     
     
-    @tasks = Task.all
+    @tasks = Task.all.page(params[:page]).per(5)
     # binding.irb
 
-      @tasks = Task.order("created_at DESC")
+      @tasks = Task.order("created_at DESC").page(params[:page]).per(5)
   
 
 
