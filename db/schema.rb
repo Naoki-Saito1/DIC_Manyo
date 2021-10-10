@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2021_10_05_050609) do
     t.string "task_name", null: false
     t.string "content", null: false
     t.date "limit"
-    t.integer "status"
-    t.integer "priority"
+    t.integer "status", default: 0, null: false
+    t.integer "priority", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

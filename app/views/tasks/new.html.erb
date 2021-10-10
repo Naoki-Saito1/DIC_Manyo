@@ -1,5 +1,6 @@
 <h1>新規タスク</h1>
 
 <%= render 'form', task: @task %>
-
-<%= link_to '戻る', tasks_path %>
+<div class="button">
+<%= link_to '戻る', tasks_path, class: "btn btn-outline-dark" %>
+</div>

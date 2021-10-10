@@ -3,10 +3,32 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
-    @tasks = Task.order("created_at DESC")
-  end
+    
+    
+    @tasks = Task.all.page(params[:page]).per(5)
+    # binding.irb
 
+      @tasks = Task.order("created_at DESC").page(params[:page]).per(5)
+  
+
+
+  if params[:task].present?
+    if params[:task][:task_name].present? && params[:task][:status].present?
+    @tasks = Task.task_name(params[:task][:task_name]).status(params[:task][:status]).page(params[:page]).per(5)
+      elsif params[:task][:task_name].present?
+    @tasks = Task.task_name(params[:task][:task_name]).page(params[:page]).per(5)
+      elsif params[:task][:status].present?
+    @tasks = Task.status(params[:task][:status]).page(params[:page]).per(5)
+    
+    end
+  end 
+  if params[:sort_expired]
+    @tasks = Task.order(limit: "DESC").page(params[:page]).per(5)
+  end
+  if params[:sort_priority]
+    @tasks = Task.order(priority: "ASC").page(params[:page]).per(5)
+  end
+end
   # GET /tasks/1 or /tasks/1.json
   def show
   end
@@ -23,7 +45,6 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: "Task was successfully created." }
@@ -65,6 +86,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:task_name, :content)
+      params.require(:task).permit(:task_name, :content, :limit, :status, :priority, :created_at)
     end
 end
