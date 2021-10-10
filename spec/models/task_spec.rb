@@ -47,12 +47,6 @@ RSpec.describe 'タスクモデル機能', type: :model do
         expect(Task.task_name('sample').status('完了').count).to eq 1
       end
     end
-      context 'scopeメソッドでステータス検索をした場合' do
-        it "ステータスに完全一致するタスクが絞り込まれる" do
-          # ここに内容を記載する
-        end
-      end
-     
     end
   end
 end
