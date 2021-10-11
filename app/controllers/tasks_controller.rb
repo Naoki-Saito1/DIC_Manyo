@@ -1,11 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-
   # GET /tasks or /tasks.json
   def index
     
     
-    @tasks = Task.all.page(params[:page]).per(5)
+    @tasks = current_user.tasks
     # binding.irb
 
       @tasks = Task.order("created_at DESC").page(params[:page]).per(5)
@@ -36,6 +35,7 @@ end
   # GET /tasks/new
   def new
     @task = Task.new
+
   end
 
   # GET /tasks/1/edit
@@ -86,6 +86,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:task_name, :content, :limit, :status, :priority, :created_at)
+      params.require(:task).permit(:task_name, :content, :limit, :status, :priority, :created_at, :user_id)
     end
 end
