@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>タスク一覧</h1> 
+<h1><%= current_user.user_name %>のタスク一覧</h1> 
 <div class="search">
 <%= form_with url: tasks_path,scope: :task, method: :get, local: true do |search| %>
     <%= search.label :'task_name' %>
@@ -45,7 +45,7 @@
 </table>
 </div>
 <br>
-<ul class="list-group" style="max-width: 400px;">
+<ul class="list-group" style="max-width: 200px;">
 <li class="list-group-item"><%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class: "btn btn-outline-info btn-sm"%></li>
 <li class="list-group-item"><%= link_to "優先順位でソートする", tasks_path(sort_priority: "true"), class: "btn btn-outline-info btn-sm"%></li>
 <li class="list-group-item"><%= link_to '新規タスク', new_task_path, class: "btn btn-outline-info btn-sm" %></li>

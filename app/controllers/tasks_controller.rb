@@ -2,15 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   # GET /tasks or /tasks.json
   def index
-    
-    
     @tasks = current_user.tasks
     # binding.irb
-
-      @tasks = Task.order("created_at DESC").page(params[:page]).per(5)
+    @tasks = Task.order("created_at DESC").page(params[:page]).per(5)
   
-
-
   if params[:task].present?
     if params[:task][:task_name].present? && params[:task][:status].present?
     @tasks = Task.task_name(params[:task][:task_name]).status(params[:task][:status]).page(params[:page]).per(5)
@@ -45,6 +40,7 @@ end
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: "Task was successfully created." }
