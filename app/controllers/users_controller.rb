@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Admin::UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
   def new
     if logged_in?
@@ -26,6 +26,5 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:user_name, :email, :password, :password_confirmation)
-    
   end
 end

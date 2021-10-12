@@ -3,24 +3,22 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = current_user.tasks
-    # binding.irb
-    @tasks = @tasks.order("created_at DESC").page(params[:page]).per(5)
-  
+    
+    if params[:sort_expired]
+      @tasks = @tasks.order(limit: "DESC").page(params[:page]).per(5)
+    elsif params[:sort_priority]
+      @tasks = @tasks.order(priority: "ASC").page(params[:page]).per(5)
+    else
+      @tasks = @tasks.order("created_at DESC").page(params[:page]).per(5)
+    end
   if params[:task].present?
     if params[:task][:task_name].present? && params[:task][:status].present?
-    @tasks = @tasks.task_name(params[:task][:task_name]).status(params[:task][:status]).page(params[:page]).per(5)
-      elsif params[:task][:task_name].present?
-    @tasks = @tasks.task_name(params[:task][:task_name]).page(params[:page]).per(5)
-      elsif params[:task][:status].present?
-    @tasks = @tasks.status(params[:task][:status]).page(params[:page]).per(5)
-    
+      @tasks = @tasks.task_name(params[:task][:task_name]).status(params[:task][:status]).page(params[:page]).per(5)
+    elsif params[:task][:task_name].present?
+      @tasks = @tasks.task_name(params[:task][:task_name]).page(params[:page]).per(5)
+    elsif params[:task][:status].present?
+      @tasks = @tasks.status(params[:task][:status]).page(params[:page]).per(5)
     end
-  end 
-  if params[:sort_expired]
-    @tasks = @tasks.order(limit: "DESC").page(params[:page]).per(5)
-  end
-  if params[:sort_priority]
-    @tasks = @tasks.order(priority: "ASC").page(params[:page]).per(5)
   end
 end
   # GET /tasks/1 or /tasks/1.json
