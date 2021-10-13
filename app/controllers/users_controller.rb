@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
   def new
     if logged_in?
