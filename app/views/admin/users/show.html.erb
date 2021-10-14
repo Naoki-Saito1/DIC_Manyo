@@ -1,2 +1,13 @@
-<h1><%= @user.name %>のページ</h1>
-<p>メールアドレス: <%= @user.email %></p>
+<table>
+  <tr>
+    <th>名前</th>
+    <th>メールアドレス</th>
+    <th>管理者権限</th>
+  </tr>
+
+  <tr>
+    <td><%= @user.user_name %></td>
+    <td><%= @user.email %></td>
+    <td><%=  "私は管理者" if @user.admin == true %></td>
+  </tr>
+</table>
