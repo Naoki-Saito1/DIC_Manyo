@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     end
   end
   def show
+    # @tasks = @user.tasks.includes(:user).page(params[:page]).per(5)
     @user = User.find(params[:id])
     if current_user.id != @user.id
       redirect_to tasks_path,notice: "あなたのページではありません"

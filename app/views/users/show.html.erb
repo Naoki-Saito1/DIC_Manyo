@@ -1,2 +1,14 @@
 <h1><%= @user.user_name %>のページ</h1>
+<div class="box2">
+<div class="mail"> 
+
+<p>あなたの名前: <%= @user.user_name %></p>
 <p>メールアドレス: <%= @user.email %></p>
+    <% if current_user.admin == true %>
+ <p><%= link_to "管理者専用", admin_users_path %></p>
+  <% end %>
+    <% if current_user.admin == false %>
+    <p>残念ながらあなたは一般Peaple</p>
+    <% end %>
+</div>
+</div>

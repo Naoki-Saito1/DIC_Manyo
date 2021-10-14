@@ -31,3 +31,21 @@ h1 {
 .button{
   padding: 30px ;
 }
+
+.box2 {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  color: #f30611;/*文字色*/
+  background: rgb(12, 0, 0);
+  border: solid 6px #f80707;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  font-size: 30px;
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+.box2 p {
+  margin: 0; 
+  padding: 0;
+}

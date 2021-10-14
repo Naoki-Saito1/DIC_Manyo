@@ -4,6 +4,7 @@
     <th>名前</th>
     <th>メールアドレス</th>
     <th>管理者権限</th>
+    <th><%= link_to '戻る', admin_users_path %></th>
   </tr>
 
   <tr>
@@ -23,6 +24,7 @@
       <th>期限</th>
       <th>状態</th>
       <th>優先度</th>
+      
      
       <th colspan="3"></th>
     </tr>
@@ -37,9 +39,11 @@
         <td><%= task.limit %></td>
         <td><%= task.status%></td>
         <td><%= task.priority %></td>
-       
+        
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
+
+
