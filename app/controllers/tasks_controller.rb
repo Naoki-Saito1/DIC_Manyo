@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   # GET /tasks or /tasks.json
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.includes(:user)
     
     if params[:sort_expired]
       @tasks = @tasks.order(limit: "DESC").page(params[:page]).per(5)

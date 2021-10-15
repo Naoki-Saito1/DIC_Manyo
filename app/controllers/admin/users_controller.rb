@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
   def new
     @user = User.new
     if current_user.admin == false
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: "権限がありません"
   end
   end
   def create
@@ -39,8 +39,9 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to admin_users_path, notice: "削除しました"
+    # if User.all.where(admin: true).count == 1 && User.all.where(admin: false).count > 1
+      @user.destroy
+      redirect_to admin_users_path, notice: "削除しました"
   end
 
   private
