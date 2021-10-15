@@ -2,14 +2,14 @@ FactoryBot.define do
   factory :task do
     task_name {'test_title'}
     content { 'test_content' }
-    limit { "2021-12-10" }
+    limit { "002021-12-10" }
     status {'完了'}
     priority {'高'}
   end
   factory :second_task, class: Task do
     task_name {'test_title2'}
     content {'test_content2'}
-    limit { "2025-12-20" }
+    limit { "002025-12-20" }
     status {'完了'}
     priority {'高'}
   end

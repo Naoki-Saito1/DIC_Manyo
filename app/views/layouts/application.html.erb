@@ -13,18 +13,20 @@
   <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
+    <div class="sticky-top">
+   
       <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Tasks", tasks_path %>
-      <% if current_user.admin == true %>
-      <%= link_to "管理者専用", admin_users_path %>
+      <p><%= link_to "Profile", user_path(current_user.id) %></p>
+      <p><%= link_to "Tasks", tasks_path %></p>
+        <% if current_user.admin == true %>
+      <p><%= link_to "管理者専用", admin_users_path %></p>
       <% end %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      <p><%= link_to "Logout", session_path(current_user.id), method: :delete %></p>
     <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
+      <p><%= link_to "Sign up", new_user_path %></p>
+      <p><%= link_to "Login", new_session_path %></p>
     <% end %>
-  
+  </div>
     <%= yield %>
      <div class="footer">
      <p>運営会社DIVE INTO CODE株式会社</p>
