@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
   def index
-    @users = User.all.order("created_at asc").page(params[:page]).per(10)
+    @users = User.all.order("created_at desc").page(params[:page]).per(10)
     if current_user.admin == false
         redirect_to tasks_path
     end
