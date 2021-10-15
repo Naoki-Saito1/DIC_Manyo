@@ -1,12 +1,31 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:task, user: user)
+    FactoryBot.create(:second_task, user: user)
+    visit new_session_path
+    # fill_in :user_name, with: 'test'
+    fill_in :Email, with: 'test@gmail.com'
+    fill_in :Password, with: '55555555'
+    click_button "Log in"
+
+    
+    
+    # let!(:task) {FactoryBot.create(:second_task,user: second_user )}
+    # visit new_task_path
+    #    fill_in 'task[task_name]', with: 'test_title'
+    #    fill_in 'task[content]', with: 'test_content'
+    #   #  fill_in 'task[status]', with: '完了'
+    #    fill_in 'task[limit]', with: "2021-12-10"
+    #   #  fill_in 'task[priority]', with: '高'
+    #    click_button 'Create my account'
   end
+
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
+    # FactoryBot.create(:second_task, user: user)
       visit tasks_path
       expect(page).to have_content 'test_title'
         expect(page).to have_content 'test_content'
@@ -47,7 +66,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限が降順に表示される' do
         visit tasks_path
         click_link '終了期限でソートする'
-        expect(page).to have_content "2025-10-20"
+        expect(page).to have_content "2025-12-20"
       end
     end
     context '優先順位でソートする' do

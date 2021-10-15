@@ -22,8 +22,9 @@ RSpec.describe 'タスクモデル機能', type: :model do
   end
   describe 'タスクモデル機能', type: :model do
     describe '検索機能' do
-      let!(:task) { FactoryBot.create(:task, task_name: 'task', status: "未着手") }
-      let!(:second_task) { FactoryBot.create(:second_task, task_name: "sample", status: "完了") }
+      user = FactoryBot.create(:user)
+      let!(:task) { FactoryBot.create(:task, user: user, task_name: 'task', status: "未着手") }
+      let!(:second_task) { FactoryBot.create(:second_task, user: user, task_name: "sample", status: "完了") }
         context 'scopeメソッドでタイトルのあいまい検索をした場合' do
           it "検索キーワードを含むタスクが絞り込まれる" do
             expect(Task.task_name('task')).to include(task)
