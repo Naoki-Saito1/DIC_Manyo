@@ -2,8 +2,8 @@ class Task < ApplicationRecord
   belongs_to :user, optional: true
   validates :task_name, presence: true
   validates :content, presence: true
-  enum status:{未着手:0,着手中:1,完了:2}
-  enum priority:{高:0,中:1,低:2}
+  enum status:{未着手:1,着手中:2,完了:3}
+  enum priority:{高:1,中:2,低:3}
   validate :date_before_start
   scope :task_name, ->  (task_name){where('task_name LIKE ?', "%#{task_name}%")}
   scope :status, ->(status) {where(status: status)}
