@@ -1,5 +1,5 @@
 <h1>新規タスク</h1>
-
+<h2>あなたのお名前【<%= current_user.user_name %>】</h2>
 <%= render 'form', task: @task %>
 <div class="button">
 <%= link_to '戻る', tasks_path, class: "btn btn-outline-dark" %>

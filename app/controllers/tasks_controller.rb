@@ -1,32 +1,24 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-
   # GET /tasks or /tasks.json
   def index
+    @tasks = current_user.tasks.includes(:user)
     
-    
-    @tasks = Task.all.page(params[:page]).per(5)
-    # binding.irb
-
-      @tasks = Task.order("created_at DESC").page(params[:page]).per(5)
-  
-
-
+    if params[:sort_expired]
+      @tasks = @tasks.order(limit: "DESC").page(params[:page]).per(5)
+    elsif params[:sort_priority]
+      @tasks = @tasks.order(priority: "ASC").page(params[:page]).per(5)
+    else
+      @tasks = @tasks.order("created_at DESC").page(params[:page]).per(5)
+    end
   if params[:task].present?
     if params[:task][:task_name].present? && params[:task][:status].present?
-    @tasks = Task.task_name(params[:task][:task_name]).status(params[:task][:status]).page(params[:page]).per(5)
-      elsif params[:task][:task_name].present?
-    @tasks = Task.task_name(params[:task][:task_name]).page(params[:page]).per(5)
-      elsif params[:task][:status].present?
-    @tasks = Task.status(params[:task][:status]).page(params[:page]).per(5)
-    
+      @tasks = @tasks.task_name(params[:task][:task_name]).status(params[:task][:status]).page(params[:page]).per(5)
+    elsif params[:task][:task_name].present?
+      @tasks = @tasks.task_name(params[:task][:task_name]).page(params[:page]).per(5)
+    elsif params[:task][:status].present?
+      @tasks = @tasks.status(params[:task][:status]).page(params[:page]).per(5)
     end
-  end 
-  if params[:sort_expired]
-    @tasks = Task.order(limit: "DESC").page(params[:page]).per(5)
-  end
-  if params[:sort_priority]
-    @tasks = Task.order(priority: "ASC").page(params[:page]).per(5)
   end
 end
   # GET /tasks/1 or /tasks/1.json
@@ -36,6 +28,7 @@ end
   # GET /tasks/new
   def new
     @task = Task.new
+
   end
 
   # GET /tasks/1/edit
@@ -44,7 +37,12 @@ end
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    # @task.user_id = current_user.id
+    # @task = Task.new(task_params)
+    # @task.user_id = current_user.id
+
+    @task = current_user.tasks.build(task_params)
+
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: "Task was successfully created." }
@@ -86,6 +84,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:task_name, :content, :limit, :status, :priority, :created_at)
+      params.require(:task).permit(:task_name, :content, :limit, :status, :priority, :created_at, :user_id)
     end
 end

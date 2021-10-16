@@ -20,7 +20,7 @@
   <%= task.label :limit %>
   <%= task.date_field :limit %>
   <%= task.label :status %>
-  <%= task.select :status,Task.statuses.keys, {include_blank: "今の状態は？"}  %>
+  <%= task.select :status,Task.statuses.keys %>
   <%= task.label :priority %>
   <%= task.select :priority, Task.priorities.keys %>
   <%= task.submit "Create my account", class: "btn btn-outline-success btn-sm" %>
