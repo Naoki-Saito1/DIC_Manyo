@@ -17,16 +17,15 @@ User.create!(user_name:  "管理者",
     password_confirmation: "22222222",
     admin: true)
 
-8.times do |n|
-  user_name = Faker::Games::Pokemon.name
-  email = Faker::Internet.email(domain: 'example')
-  password = "password"
-  User.create!(user_name: user_name,
-               email: email,
-               password: password, 
-
-               )
-end
+    5.times do |n|
+      User.create!(
+        user_name: "テスト太郎#{n + 1}",
+        email: "test#{n + 1}@test.com",
+        password:  "rrrrrrr",
+        password_confirmation: "rrrrrrr"
+        
+      )
+    end
 
 User.all.each do |user|
   user.tasks.create!(
