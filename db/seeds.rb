@@ -40,7 +40,7 @@ end
 
 User.all.each do |user|
   user.tasks.create!(
-    task_name: 'aaa',
+    task_name: 'bbb',
     content: 'texttext',
     limit: "002025-12-23",
     status: '未着手',
