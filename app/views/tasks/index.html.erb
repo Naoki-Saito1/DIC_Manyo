@@ -1,6 +1,12 @@
 
 
 <h1><%= current_user.user_name %>のタスク一覧</h1> 
+<div class="label_s">
+<%= form_with url: tasks_path, method: :get, local: true do |form| %>
+<%= form.select("label_id", Label.pluck(:name, :id), {include_blank: true}) %>
+<%= form.submit 'Label_Search', name: nil%>
+<% end %>
+</div>
 <div class="search">
 <%= form_with url: tasks_path,scope: :task, method: :get, local: true do |search| %>
     <%= search.label :'task_name' %>
