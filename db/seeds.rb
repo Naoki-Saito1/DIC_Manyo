@@ -28,3 +28,9 @@ User.create!(user_name:  "管理者",
     password:  "22222222",
     password_confirmation: "22222222",
     admin: true)
+
+
+
+    10.times do |i|
+      Label.create!(name: "sample#{i + 1}")
+    end

@@ -38,7 +38,9 @@
         <td><%= link_to '詳細', task, class: "btn btn-outline-success btn-sm" %></td>
         <td><%= link_to '編集', edit_task_path(task), class: "btn btn-outline-primary btn-sm" %></td>
         <td><%= link_to '削除', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %></td>
-        <td></td>
+        <% task.labels.each do |label| %>
+        <td><%= label.name %></td>
+      <% end %>
       </tr>
     <% end %>
   </tbody>
