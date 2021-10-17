@@ -88,3 +88,6 @@ h1 {
   padding-bottom: 120px;/*←footerの高さ*/
   box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
 }
+.page{
+  padding: 50px 20px 0 20px;
+}
