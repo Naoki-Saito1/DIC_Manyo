@@ -17,6 +17,7 @@
 #     def set_params
 #       @label = Label.find(params[:id])
 #     end
+
 #     def label_params
 #       params.require(:label).permit(:name)
 #     end
