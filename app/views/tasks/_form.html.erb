@@ -23,6 +23,9 @@
   <%= task.select :status,Task.statuses.keys %>
   <%= task.label :priority %>
   <%= task.select :priority, Task.priorities.keys %>
+  <div class="label">
+  <%= task.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+  </div>
   <%= task.submit "Create my account", class: "btn btn-outline-success btn-sm" %>
 <% end %>
 </div>
